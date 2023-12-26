@@ -1,0 +1,42 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+
+[tool.flake8]
+max-line-length = 79
+
+[tool.isort]
+line_length = 79
+include_trailing_comma = true
+
+[tool.poetry]
+name = "test-django"
+version = "0.1.0"
+description = ""
+authors = ["Sergey Bilibin <s.bilibin2017@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "test_django", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+django = "==5.0"
+django-rest-framework = "==0.1.0"
+django-split-settings = "==1.2.0"
+psycopg2-binary = "==2.9.9"
+redis = "==5.0.1"
+gunicorn = "==21.2.0"
+drf-yasg = "==1.21.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "==7.4.3"
+pytest-cov = "==4.1.0"
+flake8 = "==6.1.0"
+mypy = "==1.8.0"
+black = "==23.12.1"
+isort = "==5.13.2"
+flake8-pyproject = "==1.2.3"
+autoflake = "==2.2.1"
+toml-sort = "==0.23.1"

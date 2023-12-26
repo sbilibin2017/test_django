@@ -1,0 +1,20 @@
+@startuml test
+
+actor Client
+participant Server
+participant Stripe
+
+Client -> Server : Log in
+Server -> Клиент : JWT-token
+Client -> Server : GET /item/{id}
+Server -> Client : HTML page with Item information and button "Buy"
+Client -> Client : Push putton "Buy"
+Client -> Server : GET /buy/{id}
+Server -> Stripe : stripe.checkout.PaimentIntent.create(...)
+Stripe -> Server : session.id
+Server -> Client : session.id
+Client -> Stripe : stripe.redirectToCheckout(sessionId=session_id)
+Stripe -> Client : Checkout form
+
+@enduml
+

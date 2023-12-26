@@ -1,0 +1,60 @@
+@startuml test
+
+skinparam linetype ortho
+
+entity "Item" as item {
+  * id : uuid <<generated>>
+  --  
+  name: varchar
+  description: text
+  price: integer
+  currency: varchar
+  created_at: datetime
+  updated_at: datetime
+}
+
+entity "Discount" as discount {
+  * id : uuid <<generated>>
+  --  
+  name: varchar
+  description: text
+  value: real  
+  created_at: datetime
+  updated_at: datetime
+}
+
+entity "Tax" as tax {
+  * id : uuid <<generated>>
+  --  
+  name: varchar
+  description: text
+  value: real  
+  created_at: datetime
+  updated_at: datetime
+}
+
+entity "Order" as order {
+  * id : uuid <<generated>>
+  --
+  * item_id: uuid <<FK>>
+  * discount_id: uuid <<FK>>
+  * tax_id: uuid <<FK>>  
+  stripe_payment_intent_id : uuid
+  created_at: datetime
+  updated_at: datetime
+}
+
+entity "ItemOrder" as item_order {
+  * item_id : uuid <<FK>>
+  * order_id : uuid <<FK>>
+  __
+  created_at: datetime
+  updated_at: datetime
+}
+
+item::id ||.up.o{ item_order::item_id
+order::id ||.down.o{ item_order::order_id
+order }|..|| discount
+order }|..|| tax
+
+@enduml
