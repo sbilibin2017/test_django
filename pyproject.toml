@@ -12,6 +12,9 @@ max-line-length = 79
 line_length = 79
 include_trailing_comma = true
 
+[tool.mypy]
+ignore_missing_imports = true
+
 [tool.poetry]
 name = "test-django"
 version = "0.1.0"
@@ -29,6 +32,8 @@ psycopg2-binary = "==2.9.9"
 redis = "==5.0.1"
 gunicorn = "==21.2.0"
 drf-yasg = "==1.21.7"
+pydantic = "==2.5.3"
+django-stubs = "^4.2.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "==7.4.3"

@@ -1,0 +1,26 @@
+server {
+    listen       ${NGINX_PORT} default_server;
+    listen       [::]:${NGINX_PORT} default_server;
+    server_name  _;      
+
+    location /static {
+        autoindex on;
+        alias /app/static;
+    } 
+
+    location @backend {
+        proxy_pass http://${DOCKER_APP_HOST}:${APP_PORT};
+    }  
+    
+    location ~ ^/(admin|api) { 
+        proxy_pass http://${DOCKER_APP_HOST}:${APP_PORT};
+    } 
+
+    error_page  404  /404.html;
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    } 
+}
+
